@@ -1,6 +1,6 @@
 //Requirements
 const fs = require('fs');
-const storedData = require('./db/db.json');
+const storedData = require("../db/db.json");
 
 
 //Exporting api route function
@@ -27,15 +27,33 @@ module.exports = function(app) {
     });
 
     //POST route to add all notes
-    app.post('/api/notes'. function(req, res) {
+    app.post('/api/notes', function(req, res) {
 
         //Gives each note an ID
-        if (storedData.length == 0)
-    })
+        if (storedData.length === 0) {
+            req.body.id = '0';
+        } else {
+            req.body.id = JSON.stringify(JSON.parse(storedData[storedData.length - 1].id) + 1);
+        }
 
-    //display note from file
+        console.log(`req.body.id: ${req.body.id}`);
 
-    //add it to html
+        //Pushes body to collect
+        storedData.push(req.body);
 
+        //Writes note to Database and console logs
+        writeToDB(storedData)
+        console.log(storedData);
 
+        //Returns new note to JSON
+        res.json(req.body);
+    });
+
+    //Delete method to search and delete a specific note
+    app.delete("/api/notes/:id", function(req, res) {
+        notes.splice(req.params.id, 1);
+        writeToDB();
+        console.log("Deleted note with id "+req.params.id);
+    });
 };
+
