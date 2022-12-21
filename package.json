@@ -1,14 +1,15 @@
 {
   "name": "note-taker",
   "version": "1.0.0",
-  "description": "",
+  "description": "For people who need to take notes online",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Nicholas Miller",
+  "license": "MIT",
   "dependencies": {
-    "express": "^4.16.4"
+    "express": "^4.18.2",
+    "mysql": "^2.16.0"
   }
 }
